@@ -14,7 +14,7 @@ def Quad_surf(x,y,a,b,c,d,e,f):
 
 
 # Recuperation de donnée
-poutres = ["poutrelle_vide","poutrelle_charge"]
+poutres = ["navire_vide","navire_charge"]
 poutre = poutres[0]
 resol = 500 #nombre de noeud du maillage pour calculer le modèle suivant x ou y
 data = np.loadtxt(poutre + ".txt")

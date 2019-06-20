@@ -38,9 +38,15 @@ V = Y - Yhat # résidu
 m_v = np.mean(V)
 S_v = np.std(V)
 
-# fig = plt.figure()
-# ax = fig.gca(projection='3d')
-# #ax.scatter(x,y,z,marker = ".",c="gray",alpha = 0.2)
+plt.figure()
+plt.plot(1000*V)
+plt.title("Résidus " + poutre)
+plt.xlabel(" indice des points")
+plt.ylabel("résidu [mm]")
+
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+#ax.scatter(x,y,z,marker = ".",c="blue",alpha = 0.2)
 
 x_s = np.linspace(min(x), max(x), resol)
 y_s = np.linspace(min(y), max(y), resol)
@@ -71,9 +77,9 @@ V = Y - Yhat # résidu
 m_v = np.mean(V)
 S_v = np.std(V)
 
-fig = plt.figure()
-ax = fig.gca(projection='3d')
-# #ax.scatter(x,y,z,marker = ".",c="gray",alpha = 0.2)
+# fig = plt.figure()
+# ax = fig.gca(projection='3d')
+# ax.scatter(x,y,z,marker = ".",c="blue",alpha = 0.2)
 
 
 (a,b,c,d,e,f) = Xhat
@@ -82,16 +88,20 @@ z_s_charge = a*(x_s**2) + b*(y_s**2) + c*x_s*y_s + d*x_s + e*y_s +f
 
 deplacement = z_s_charge - z_s_vide
 
-surf = ax.plot_surface(x_s,y_s,z_s_charge,color = "blue",alpha = 0.25 ,linewidth=0, antialiased=False)
-surf = ax.plot_surface(x_s,y_s,z_s_vide,color = 'red' ,linewidth=0, antialiased=False)
+#surf = ax.plot_surface(x_s,y_s,z_s_charge,color = "blue",alpha = 0.25 ,linewidth=0, antialiased=False)
+surf = ax.plot_surface(x_s,y_s,z_s_charge - z_s_vide,color = 'red' ,alpha = 0.25 ,linewidth=0, antialiased=False)
 
 ax.set_xlabel('x(m)')
 ax.set_ylabel('y(m)')
-ax.set_zlabel('déplacement(m)')
+ax.set_zlabel('z(m)')
 
-plt.title("déplacement de la poutre")
+
+plt.title("navire vide et moindres carrés")
 plt.figure()
+plt.title("visulisation du champ de déplacement (m)")
+
 plt.imshow(z_s_charge-z_s_vide)
+plt.colorbar()
 
 plt.figure()
 plt.plot(z_s_charge[:,0])
@@ -102,6 +112,8 @@ plt.plot(z_s_charge[:,-1])
 plt.plot(z_s_vide[:,-1])
 
 fleche = np.min(deplacement) # en mètre
+
+
 # plt.figure()
 # plt.plot(1000*V)
 # plt.title("Résidus " + poutre)
